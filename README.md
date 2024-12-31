@@ -20,9 +20,13 @@ settings.pyの修正
 起動  
 `python manage.py runserver`
 
-DBの反映  
+DBのテーブル作成  
 デフォルトで利用するアプリ(settings.py)もDBを使うので初回も実行する  
 `python manage.py migrate`
+
+新規モデルの作成  
+マイグレーションを作成し、実行する  
+`python manage.py makemigrations && python manage.py migrate`
 
 superuser作成  
 `python manage.py createsuperuser`
