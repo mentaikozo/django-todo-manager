@@ -1,0 +1,13 @@
+{% extends "app/base.html" %}
+{% block title %}ホーム{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-5"></h1>
+    <p>{{ user.username }}さん、こんにちは。</p>
+    <form action='{% url "app:logout" %}' method='post' name='logout'>
+        {% csrf_token %}
+        <a href="javascript:logout.submit()">Logout</a>
+    </form>
+</div>
+{% endblock %}
