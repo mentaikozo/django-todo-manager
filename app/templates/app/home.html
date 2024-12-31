@@ -5,6 +5,19 @@
 <div class="container">
     <h1 class="my-5"></h1>
     <p>{{ user.username }}さん、こんにちは。</p>
+
+    <div>
+        <a href="{% url 'app:new-task' %}" class="btn btn-outline-success">新しいタスク</a>
+    </div>
+
+    {% if tasks %}
+        <div>
+            {% for task in tasks %}
+                <li>{{ task }}</li>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <form action='{% url "app:logout" %}' method='post' name='logout'>
         {% csrf_token %}
         <a href="javascript:logout.submit()">Logout</a>
