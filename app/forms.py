@@ -2,6 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ModelForm
 
 from app.models import Task
+from django import forms
 
 
 class LoginForm(AuthenticationForm):
@@ -14,4 +15,10 @@ class LoginForm(AuthenticationForm):
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ["name","status","pub_date","notes"]
+        fields = ["name", "status", "priority", "pub_date", "notes"]
+        widgets = {
+            "name": forms.TextInput(attrs={"placeholder": "タスク名"}),
+            "status": forms.RadioSelect(),
+            "priority": forms.NumberInput(attrs={"min": 1, "max": 10}),
+            "notes": forms.Textarea(attrs={"rows": 3})
+        }

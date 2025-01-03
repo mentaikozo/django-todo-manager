@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "crispy_forms",
+    "crispy_bootstrap4",
     'app.apps.AppConfig',
 ]
 
@@ -104,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'ja'
+LANGUAGE_CODE = 'ja-JP'
 
 TIME_ZONE = 'Asia/Tokyo'
 
@@ -126,3 +128,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = "app:login"
 LOGIN_REDIRECT_URL = "app:home"
 LOGOUT_REDIRECT_URL = "app:top"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
