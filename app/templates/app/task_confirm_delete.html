@@ -7,20 +7,12 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        <div class="row">
-            <div class="col-12">
-                <div class="float-right">
-                    <a class="btn btn-outline-secondary" href="{% url 'app:home' %}">戻る</a>
-                    <input type="submit" class="btn btn-outline-secondary" value="削除" />
-                </div>
-            </div>
-        </div>
         {% include "./task_card.html" %}
         <div class="row">
             <div class="col-12">
-                <div class="float-right">
+                <div class="float-left pb-3">
                     <a class="btn btn-outline-secondary" href="{% url 'app:home' %}">戻る</a>
-                    <input type="submit" class="btn btn-outline-secondary" value="削除" />
+                    <input type="submit" class="btn btn-danger" value="削除" />
                 </div>
             </div>
         </div>

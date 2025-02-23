@@ -10,9 +10,9 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="float-right">
+            <div class="float-left pb-3">
                 <a class="btn btn-outline-secondary" href="{% url 'app:home' %}">戻る</a>
-                <a class="btn btn-outline-secondary save" href="#">保存</a>
+                <a class="btn btn-success save" href="#">保存</a>
             </div>
         </div>
     </div>
@@ -21,14 +21,6 @@
             <form method="post" id="myform">
                 {%crispy form%}
             </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="float-right">
-                <a class="btn btn-outline-secondary" href="{% url 'app:home' %}">戻る</a>
-                <a class="btn btn-outline-secondary save" href="#">保存</a>
-            </div>
         </div>
     </div>
 </div>

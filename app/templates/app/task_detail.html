@@ -3,15 +3,18 @@
 <div class="container">
 	<h2 class="text-center">詳細表示</h2>
 	<div class="row">
-		<div class="col-12">
-			<a class="btn btn-outline-secondary float-right" href="{% url 'app:home' %}">戻る</a>
+		<div class="col-12 float-left pb-3">
+			<a class="btn btn-primary" href="{% url 'app:update' task.pk %}">編集</a>
+			<a class="btn btn-outline-secondary" href="{% url 'app:home' %}">戻る</a>
 		</div>
 	</div>
 	<!--  -->
 	{% include "./task_card.html" %}
 	<div class="row">
 		<div class="col-12">
-			<a class="btn btn-outline-secondary float-right" href="{% url 'app:home' %}">戻る</a>
+			<div class="float-left">
+				<a class="btn btn-danger" href="{% url 'app:delete' task.pk %}">削除</a>
+			</div>
 		</div>
 	</div>
 </div>
