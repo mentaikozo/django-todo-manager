@@ -4,6 +4,7 @@
         "endcomment",
         "endfor",
         "filterset",
+        "linkify",
         "makemigrations",
         "runserver",
         "showmigrations",

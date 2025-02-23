@@ -14,6 +14,8 @@
 - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html)
 - [django-filter](https://django-filter.readthedocs.io/en/stable/)
 - [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
+- [django-tables2](http://django-tables2.readthedocs.io/en/latest/index.html)
+- [django-extensions](https://django-extensions.readthedocs.io/en/latest/)
 
 ## setup
 
@@ -32,21 +34,21 @@ settings.pyの修正
 
 ## memo
 
-起動  
+### 起動  
 `python manage.py runserver`
 
-DBのテーブル作成  
+### DBのテーブル作成  
 デフォルトで利用するアプリ(settings.py)もDBを使うので初回も実行する  
 `python manage.py migrate`
 
-新規モデルの作成  
+### 新規モデルの作成  
 マイグレーションを作成し、実行する  
 `python manage.py makemigrations && python manage.py migrate`
 
-superuser作成  
+### superuser作成  
 `python manage.py createsuperuser`
 
-モデル変更時にmigrateでエラーが出たとき  
+### モデル変更時にmigrateでエラーが出たとき  
 ```
 python manage.py showmigrations
 python manage.py migrate app zero --fake
@@ -54,6 +56,17 @@ python manage.py migrate app zero --fake
   fake: `no such table` 等のエラーでこけるのを防ぐために、実行したことにするオプション
 python manage.py migrate
 ```
+
+### URLの解決チェック
+```sh
+python manage.py show_urls
+
+python manage.py shell
+
+from django.urls import reverse
+reverse("【URLパターンの名前】", args=[1])
+```
+
 
 XREAにPython3.13.1を入れる  
 ここを参考に作業。  
