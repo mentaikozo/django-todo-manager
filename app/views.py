@@ -2,9 +2,11 @@ from datetime import datetime
 
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView
 from django_tables2 import SingleTableView
 from app.filters import TaskFilter
@@ -17,12 +19,16 @@ from app.tables import TaskTable
 
 from .forms import LoginForm, TaskForm
 
+import django_otp
+from django_otp.plugins.otp_totp.models import TOTPDevice
+from django_otp.qr import write_qrcode_image
+
 
 class TopView(TemplateView):
     template_name = "app/top.html"
 
 
-class TaskFilterView(LoginRequiredMixin, FilterView, SingleTableView):
+class TaskFilterView(LoginRequiredMixin, FilterView, SingleTableView, View):
     model = Task
     table_class = TaskTable
     template_name = "task_filter.html"
@@ -35,9 +41,18 @@ class TaskFilterView(LoginRequiredMixin, FilterView, SingleTableView):
     strict = False
 
     # 1ページあたりの表示件数
-    paginate_by = 10
+    paginate_by = 100
 
-    # 検索条件をセッションに保存する or 呼び出す
+    def get(self, request, *args, **kwargs):
+        if request.user.is_verified():
+            print("OTP 検証済み")
+        else:
+            print("OTP 未検証")
+            return redirect("app:verify_otp")
+
+        return super().get(request, **kwargs)
+
+    # # 検索条件をセッションに保存する or 呼び出す
     # def get(self, request, **kwargs):
     #     if request.GET:
     #         request.session['query'] = request.GET
@@ -47,7 +62,6 @@ class TaskFilterView(LoginRequiredMixin, FilterView, SingleTableView):
     #             for key in request.session['query'].keys():
     #                 request.GET[key] = request.session['query'][key]
 
-    #     return super().get(request, **kwargs)
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
@@ -104,3 +118,56 @@ class LogoutView(LoginRequiredMixin, LogoutView):
 #             form = TaskForm()
 #             task_id = form.cleaned_data["id"]
 #             return render(request, "app/update-task.html", {"task": task})
+
+class OtpView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "app/otp.html")
+
+    def post(self, request, *args, **kwargs):
+        # デバイスを追加する。
+        device = TOTPDevice.objects.create(user=request.user, name='default', confirmed=False)
+
+        # write_qrcode_image を使うことで、QRコードを生成できる。
+        response = HttpResponse(content_type='image/svg+xml')
+        write_qrcode_image(device.config_url, response)
+
+        return response
+
+
+# トークンを検証する。
+class VerifyOtpView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        otp_device = TOTPDevice.objects.filter(user=request.user).first()
+
+        if otp_device is None:
+            print("otp デバイスなし")
+            return redirect("app:otp")
+
+        return render(request, "app/verify_otp.html")
+
+
+    def post(self, request, *args, **kwargs):
+        otp_device = TOTPDevice.objects.filter(user=request.user).first()
+
+        if otp_device is None:
+            # otpデバイスがないので追加してもらう
+            print("otp デバイスなし")
+            return redirect("app:otp")
+
+        # OTPのトークンを検証
+        if otp_device.verify_token(request.POST.get('otp_token')):
+            # 以後、request.user.is_verified() で判定できる。
+
+            otp_device.confirmed = True
+            otp_device.save()
+
+            # OTPのログインをする
+            django_otp.login(request, otp_device)
+
+            # OTPが正しければ認証成功
+            return redirect("app:home")  # 認証成功時のリダイレクト先
+
+
+        # OTPが間違っていればエラーメッセージを表示
+        print("otpが違います。")
+        return redirect("app:verify_otp")
