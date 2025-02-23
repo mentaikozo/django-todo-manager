@@ -6,12 +6,14 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
+from django_tables2 import SingleTableView
 from app.filters import TaskFilter
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 
 from app.models import Task
+from app.tables import TaskTable
 
 from .forms import LoginForm, TaskForm
 
@@ -20,8 +22,9 @@ class TopView(TemplateView):
     template_name = "app/top.html"
 
 
-class TaskFilterView(LoginRequiredMixin, FilterView):
+class TaskFilterView(LoginRequiredMixin, FilterView, SingleTableView):
     model = Task
+    table_class = TaskTable
     template_name = "task_filter.html"
     filterset_class = TaskFilter
 

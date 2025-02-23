@@ -1,6 +1,16 @@
 {
     "cSpell.words": [
+        "createsuperuser",
+        "endcomment",
         "endfor",
-        "stylesheet"
+        "filterset",
+        "makemigrations",
+        "runserver",
+        "showmigrations",
+        "startapp",
+        "startproject",
+        "stylesheet",
+        "venv",
+        "XREA"
     ]
 }

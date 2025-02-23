@@ -1,6 +1,8 @@
 {% extends "./_base.html" %}
 {% block content %}
 {% load crispy_forms_tags %}
+{% load render_table from django_tables2 %}
+
 <div class="container">
 	<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
@@ -41,7 +43,8 @@
 
 	<div class="row">
 		<div class="col-12">
-			<ul class="list-group">
+			{% render_table table %}
+			{% comment %} <ul class="list-group">
 				{% for task in task_list %}
 				<li class="list-group-task">
 					<div class="row">
@@ -75,7 +78,7 @@
 					対象のデータがありません
 				</li>
 				{% endfor %}
-			</ul>
+			</ul> {% endcomment %}
 		</div>
 	</div>
 	<div class="row" >
