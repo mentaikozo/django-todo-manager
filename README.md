@@ -54,3 +54,7 @@ python manage.py migrate app zero --fake
   fake: `no such table` 等のエラーでこけるのを防ぐために、実行したことにするオプション
 python manage.py migrate
 ```
+
+XREAにPython3.13.1を入れる  
+ここを参考に作業。  
+https://www.tomoyan.net/python/python_install_xrea
