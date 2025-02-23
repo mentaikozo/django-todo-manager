@@ -1,4 +1,3 @@
-from datetime import date
 from django.core import validators
 from django.db import models
 from django.utils import timezone
@@ -13,6 +12,13 @@ class Task(models.Model):
         verbose_name="タスク名",
         max_length=100
     )
+
+    progress = models.CharField(
+        verbose_name = "進捗",
+        max_length=4,
+        default = "0%"
+    )
+
     status = models.IntegerField(
         verbose_name="ステータス",
         choices=STATUS_CHOICES,
@@ -35,7 +41,7 @@ class Task(models.Model):
         verbose_name="メモ",
         blank=True,
         null=True,
-        max_length=500
+        max_length=50000
     )
 
     def __str__(self):
