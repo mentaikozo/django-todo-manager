@@ -45,7 +45,15 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     'app.apps.AppConfig',
-    'django_tables2'
+    'django_tables2',
+    'axes'
+]
+
+AUTHENTICATION_BACKENDS = [
+    # AxesStandaloneBackendをAUTHENTICATION_BACKENDSのリストの先頭に記載する必要があります
+    'axes.backends.AxesStandaloneBackend',
+    # 今回はDjangoでデフォルトで設定されているModelBackendを認証で使用します
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +65,22 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_otp.middleware.OTPMiddleware',
+    # AxesMiddlewareをMIDDLEWAREの配列の一番最後に記載する必要があります
+    'axes.middleware.AxesMiddleware',
 ]
+
+# ロックされるまでのログイン回数
+AXES_FAILURE_LIMIT = 3
+# 自動でロックが解除されるまでの時間
+AXES_COOLOFF_TIME = 0.5
+# ロック対象をusernameで判断する
+AXES_LOCKOUT_PARAMETERS = ["username"]
+# ログインに成功したら失敗回数がリセットされるようにする
+AXES_RESET_ON_SUCCESS = True
+# アクセスログをデータベースに書き込まないようにする
+AXES_DISABLE_ACCESS_LOG = True
+# ロックアウト中にログインに失敗した場合、クールオフ期間をリセットしないようにする
+AXES_RESET_COOL_OFF_ON_FAILURE_DURING_LOCKOUT = False
 
 ROOT_URLCONF = 'TodoManager.urls'
 
