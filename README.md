@@ -23,7 +23,7 @@
 1. `.\venv\Scripts\activate`
 1. `pip install --upgrade pip`
 1. `pip install Django`
-1. `django-admin startproject TodoManager .`
+1. `django-admin startproject learning_manager .`
 1. アプリ作成 `python manage.py startapp app`
 
 settings.pyの修正  
