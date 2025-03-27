@@ -175,3 +175,6 @@ cython_debug/
 *.tfstate.backup
 *.terraform.lock.hcl
 terraform/.terraform/*
+
+# copilot settings
+./github/copilot-instructions.md

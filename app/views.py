@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 from django.contrib.auth.views import LoginView, LogoutView
@@ -23,6 +24,7 @@ import django_otp
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.qr import write_qrcode_image
 
+logger = logging.getLogger(__name__)
 
 class TopView(TemplateView):
     template_name = "app/top.html"
@@ -44,27 +46,22 @@ class TaskFilterView(LoginRequiredMixin, FilterView, SingleTableView, View):
     paginate_by = 100
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_verified():
-            print("OTP 検証済み")
-        else:
-            print("OTP 未検証")
+        if not request.user.is_verified():
+            logger.warning("OTP 未検証")
             return redirect("app:verify_otp")
 
+        logger.info("OTP 検証済み")
         return super().get(request, **kwargs)
-
-    # # 検索条件をセッションに保存する or 呼び出す
-    # def get(self, request, **kwargs):
-    #     if request.GET:
-    #         request.session['query'] = request.GET
-    #     else:
-    #         request.GET = request.GET.copy()
-    #         if 'query' in request.session.keys():
-    #             for key in request.session['query'].keys():
-    #                 request.GET[key] = request.session['query'][key]
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # マークダウンをHTMLに変換してテンプレートに渡す
+        context['description_html'] = self.object.render_notes_as_html()
+        return context
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
@@ -136,38 +133,28 @@ class OtpView(LoginRequiredMixin, View):
 
 # トークンを検証する。
 class VerifyOtpView(LoginRequiredMixin, View):
+    def get_otp_device(self, user):
+        return TOTPDevice.objects.filter(user=user).first()
+
     def get(self, request, *args, **kwargs):
-        otp_device = TOTPDevice.objects.filter(user=request.user).first()
-
+        otp_device = self.get_otp_device(request.user)
         if otp_device is None:
-            print("otp デバイスなし")
+            logger.warning("OTP デバイスなし")
             return redirect("app:otp")
-
         return render(request, "app/verify_otp.html")
 
-
     def post(self, request, *args, **kwargs):
-        otp_device = TOTPDevice.objects.filter(user=request.user).first()
-
+        otp_device = self.get_otp_device(request.user)
         if otp_device is None:
-            # otpデバイスがないので追加してもらう
-            print("otp デバイスなし")
+            logger.warning("OTP デバイスなし")
             return redirect("app:otp")
 
-        # OTPのトークンを検証
         if otp_device.verify_token(request.POST.get('otp_token')):
-            # 以後、request.user.is_verified() で判定できる。
-
             otp_device.confirmed = True
             otp_device.save()
-
-            # OTPのログインをする
             django_otp.login(request, otp_device)
+            logger.info("OTP 認証成功")
+            return redirect("app:home")
 
-            # OTPが正しければ認証成功
-            return redirect("app:home")  # 認証成功時のリダイレクト先
-
-
-        # OTPが間違っていればエラーメッセージを表示
-        print("otpが違います。")
+        logger.error("OTP が違います")
         return redirect("app:verify_otp")

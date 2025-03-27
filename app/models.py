@@ -1,6 +1,7 @@
 from django.core import validators
 from django.db import models
 from django.utils import timezone
+from markdown2 import markdown
 
 class Task(models.Model):
     STATUS_CHOICES = (
@@ -43,6 +44,10 @@ class Task(models.Model):
         null=True,
         max_length=50000
     )
+
+    def render_notes_as_html(self):
+        """マークダウンをHTMLに変換して返す"""
+        return markdown(self.notes or "")
 
     def __str__(self):
         return self.name

@@ -21,5 +21,12 @@ class TaskForm(ModelForm):
             "progress": forms.TextInput(attrs={"placeholder": "input any%"}),
             "status": forms.RadioSelect(),
             "priority": forms.NumberInput(attrs={"min": 1, "max": 10}),
-            "notes": forms.Textarea(attrs={"rows": 3})
+            "notes": forms.Textarea(attrs={'placeholder': 'ここにマークダウンを入力してください✨'})
+        }
+        labels = {
+            "name": "タスク名",
+            "progress": "進捗",
+            "status": "ステータス",
+            "priority": "優先度",
+            "notes": "メモ"
         }

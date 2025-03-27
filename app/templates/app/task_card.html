@@ -8,6 +8,14 @@
 </div>
 <div class="row">
     <div class="col-3">
+        <p>登録日</p>
+    </div>
+    <div class="col-9">
+        <p>{{ task.pub_date|date:"Y/m/d G:i:s" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
         <p>進捗</p>
     </div>
     <div class="col-9">
@@ -30,19 +38,13 @@
         <p>{{ task.priority }}</p>
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="col-3">
-        <p>メモ</p>
+        <p>詳細</p>
     </div>
     <div class="col-9">
-        <p>{{ task.notes|linebreaksbr }}</p>
+        <div>{{ description_html|safe }}</div>
     </div>
 </div>
-<div class="row">
-    <div class="col-3">
-        <p>登録日</p>
-    </div>
-    <div class="col-9">
-        <p>{{ task.pub_date|date:"Y/m/d G:i:s" }}</p>
-    </div>
-</div>
+
