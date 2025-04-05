@@ -24,7 +24,9 @@ import django_otp
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.qr import write_qrcode_image
 
+
 logger = logging.getLogger(__name__)
+
 
 class TopView(TemplateView):
     template_name = "app/top.html"
@@ -69,11 +71,29 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     form_class = TaskForm
     success_url = reverse_lazy('app:home')
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        tags = form.cleaned_data.get('tags')
+        if tags:
+            # 先にオブジェクトを保存
+            self.object.save()
+            self.object.tags.add(*tags)
+            self.object.save()
+        return response
+
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy('app:home')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        tags = form.cleaned_data.get('tags')
+        if tags:
+            self.object.tags = tags
+            self.object.save()
+        return response
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):

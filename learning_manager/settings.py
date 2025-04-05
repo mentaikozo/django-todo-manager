@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
     'app.apps.AppConfig',
     'django_tables2',
+    'taggit',
     'axes'
 ]
 

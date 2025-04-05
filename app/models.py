@@ -2,6 +2,7 @@ from django.core import validators
 from django.db import models
 from django.utils import timezone
 import markdown2
+from taggit.managers import TaggableManager  # タグ機能をインポート
 
 
 class Task(models.Model):
@@ -14,6 +15,8 @@ class Task(models.Model):
         verbose_name="タスク名",
         max_length=100
     )
+
+    tags = TaggableManager()
 
     progress = models.CharField(
         verbose_name = "進捗",
@@ -45,6 +48,7 @@ class Task(models.Model):
         null=True,
         max_length=50000
     )
+
 
     def render_notes_as_html(self):
         """マークダウンをHTMLに変換して返す"""
