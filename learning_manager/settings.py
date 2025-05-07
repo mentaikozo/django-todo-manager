@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,17 +38,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',
-    'django_otp',
-    'django_otp.plugins.otp_totp',
-    'django_otp.plugins.otp_static',
-    'django_otp.plugins.otp_email',
+
+    # 3rd party
+    'axes',
     "crispy_forms",
     "crispy_bootstrap4",
-    'app.apps.AppConfig',
+    'django_extensions',
+    'django_otp',
+    'django_otp.plugins.otp_email',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
     'django_tables2',
+    'dj_rest_auth',
+    'rest_framework',
+    'rest_framework.authtoken',
     'taggit',
-    'axes'
+
+    # my apps
+    'apiv1.apps.Apiv1Config',
+    'app.apps.AppConfig',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -88,7 +97,7 @@ ROOT_URLCONF = 'learning_manager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -151,6 +160,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -161,3 +172,19 @@ LOGIN_REDIRECT_URL = "app:home"
 LOGOUT_REDIRECT_URL = "app:top"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# DRF
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+# dj-rest-auth
+REST_USE_JWT = True
+
+# django-rest-framework-simplejwt
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30)
+}
