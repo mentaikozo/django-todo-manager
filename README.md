@@ -16,21 +16,55 @@
 - [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
 - [django-tables2](http://django-tables2.readthedocs.io/en/latest/index.html)
 - [django-extensions](https://django-extensions.readthedocs.io/en/latest/)
+- [django-rest-framework](https://www.django-rest-framework.org/)
+- [dj-rest-auth](https://dj-rest-auth.readthedocs.io/en/latest/)
+- [simple-jwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
+- [django-taggit](https://django-taggit.readthedocs.io/en/latest/)
+- [django-otp](https://django-otp-official.readthedocs.io/en/stable/)
 
 ## setup
+
+### Django app
 
 1. `python -m venv venv`
 1. `.\venv\Scripts\activate`
 1. `pip install --upgrade pip`
 1. `pip install Django`
 1. `django-admin startproject learning_manager .`
-1. アプリ作成 `python manage.py startapp app`
+1. start app
 
-settings.pyの修正  
-- INSTALLED_APP
-- LANGUAGE_CODE
-- TIME_ZONE
-- ALLOWED_HOSTS = ["*"]
+    ```sh
+    python manage.py startapp app
+    python manage.py startapp apiv1
+    ```
+
+### front app
+
+nvmやpnpmのインストール
+
+```sh
+# nvmをダウンロードしてインストールする
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+# シェルを再起動する代わりに実行する
+\. "$HOME/.nvm/nvm.sh"
+# Node.jsをダウンロードしてインストールする
+nvm install 24
+# Node.jsのバージョンを確認する
+node -v # "v24.0.0"が表示される。
+nvm current # "v24.0.0"が表示される。
+# pnpmをダウンロードしてインストールする
+corepack enable pnpm
+# pnpmのバージョンを確認する
+pnpm -v
+# Vueアプリ作成
+pnpx create-vite
+# インストール
+cd frontend
+pnpm install
+# 起動
+pnpm run dev
+```
+
 
 ## memo
 
@@ -66,8 +100,3 @@ python manage.py shell
 from django.urls import reverse
 reverse("【URLパターンの名前】", args=[1])
 ```
-
-
-XREAにPython3.13.1を入れる  
-ここを参考に作業。  
-https://www.tomoyan.net/python/python_install_xrea

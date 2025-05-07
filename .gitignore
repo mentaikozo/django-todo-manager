@@ -178,3 +178,5 @@ terraform/.terraform/*
 
 # copilot settings
 ./github/copilot-instructions.md
+
+node_modules/
