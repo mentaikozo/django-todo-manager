@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'taggit',
 
     # my apps
-    'apiv1.apps.Apiv1Config',
     'app.apps.AppConfig',
 ]
 

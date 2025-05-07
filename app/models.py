@@ -1,3 +1,4 @@
+import uuid
 from django.core import validators
 from django.db import models
 from django.utils import timezone
@@ -6,14 +7,21 @@ from taggit.managers import TaggableManager  # タグ機能をインポート
 
 
 class Task(models.Model):
+    class Meta:
+        verbose_name = "タスク"
+        verbose_name_plural = "タスク"
+
     STATUS_CHOICES = (
         (1, "済"),
         (0, "未")
     )
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+
     name = models.CharField(
         verbose_name="タスク名",
-        max_length=100
+        max_length=100,
+        unique=True
     )
 
     tags = TaggableManager()
@@ -40,7 +48,7 @@ class Task(models.Model):
     )
     pub_date = models.DateTimeField(
         verbose_name="登録日",
-        default=timezone.now()
+        auto_now_add=True
     )
     notes = models.TextField(
         verbose_name="メモ",
@@ -57,7 +65,3 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name = "タスク"
-        verbose_name_plural = "タスク"
