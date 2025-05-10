@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import TopView, LogoutView, LoginView, OtpView, VerifyOtpView, TaskFilterView, TaskCreateView, TaskUpdateView, TaskDeleteView, TaskDetailView
+from .views import TaskListCreateAPIView, TopView, LogoutView, LoginView, OtpView, VerifyOtpView, TaskFilterView, TaskCreateView, TaskUpdateView, TaskDeleteView, TaskDetailView, TaskRetrieveUpdateDestroyAPIView
 
 
 app_name = "app"
@@ -15,4 +15,7 @@ urlpatterns = [
     path("detail/<int:pk>/", TaskDetailView.as_view(), name="detail"),
     path("update/<int:pk>/", TaskUpdateView.as_view(), name="update"),
     path("delete/<int:pk>/", TaskDeleteView.as_view(), name="delete"),
+    # API
+    path("api/tasks/", TaskListCreateAPIView.as_view()),
+    path("api/tasks/<pk>/", TaskRetrieveUpdateDestroyAPIView.as_view())
 ]

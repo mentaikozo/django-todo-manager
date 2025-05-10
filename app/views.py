@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView
+from app.serializers import TaskSerializer
 from django_tables2 import SingleTableView
 from app.filters import TaskFilter
 from django.views.generic.detail import DetailView
@@ -23,6 +24,9 @@ from .forms import LoginForm, TaskForm
 import django_otp
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.qr import write_qrcode_image
+from rest_framework.response import Response
+from rest_framework import status, views
+from rest_framework.generics import get_object_or_404
 
 
 logger = logging.getLogger(__name__)
@@ -30,6 +34,50 @@ logger = logging.getLogger(__name__)
 
 class TopView(TemplateView):
     template_name = "app/top.html"
+
+
+# DRFのAPIを使うためのView
+class TaskListCreateAPIView(views.APIView):
+    """タスクの一覧表示と新規作成を行うAPI"""
+
+    def get(self, request, *args, **kwargs):
+        task_list = Task.objects.all()
+        serializer = TaskSerializer(instance=task_list, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = TaskSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class TaskRetrieveUpdateDestroyAPIView(views.APIView):
+    """タスクの詳細表示、更新、削除を行うAPI"""
+
+    def get(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
+        serializer = TaskSerializer(instance=task)
+        return Response(serializer.data)
+
+    def put(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
+        serializer = TaskSerializer(instance=task, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def patch(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
+        serializer = TaskSerializer(instance=task, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
+        task.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class TaskFilterView(LoginRequiredMixin, FilterView, SingleTableView, View):
