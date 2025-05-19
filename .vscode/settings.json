@@ -19,6 +19,7 @@
         "stylesheet",
         "TOTP",
         "venv",
+        "vite",
         "XREA"
     ]
 }
