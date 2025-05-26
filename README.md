@@ -1,5 +1,13 @@
 # Vue.js + Djangoの学習記録用
 
+## 構成
+UI: Vue3  
+CSS: Vuetify ※予定  
+API: Django (Django REST Framework)  
+DB: SQLite ※今後、MySQLへ  
+IaC: terraform
+
+
 ## Django参考サイト
 
 - [\[Python\] Djangoチュートリアル - 汎用業務Webアプリを最速で作る](https://qiita.com/okoppe8/items/54eb105c9c94c0960f14#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%89-1)
