@@ -11,16 +11,19 @@
 - [Multiple Object Mixin](https://docs.djangoproject.com/ja/5.1/ref/class-based-views/mixins-multiple-object/#django.views.generic.list.MultipleObjectMixin.get_queryset)
 
 ## Django plugins
-- [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html)
-- [django-filter](https://django-filter.readthedocs.io/en/stable/)
 - [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
-- [django-tables2](http://django-tables2.readthedocs.io/en/latest/index.html)
+- [django-cors-headers](https://pypi.org/project/django-cors-headers/)
+- [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html)
 - [django-extensions](https://django-extensions.readthedocs.io/en/latest/)
+- [django-filter](https://django-filter.readthedocs.io/en/stable/)
+- [django-otp](https://django-otp-official.readthedocs.io/en/stable/)
 - [django-rest-framework](https://www.django-rest-framework.org/)
+- [django-tables2](http://django-tables2.readthedocs.io/en/latest/index.html)
+- [django-taggit](https://django-taggit.readthedocs.io/en/latest/)
 - [dj-rest-auth](https://dj-rest-auth.readthedocs.io/en/latest/)
 - [simple-jwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
-- [django-taggit](https://django-taggit.readthedocs.io/en/latest/)
-- [django-otp](https://django-otp-official.readthedocs.io/en/stable/)
+
+
 
 ## setup
 
