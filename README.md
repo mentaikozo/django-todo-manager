@@ -1,6 +1,6 @@
-# 学習記録用
+# Vue.js + Djangoの学習記録用
 
-## 参考サイト
+## Django参考サイト
 
 - [\[Python\] Djangoチュートリアル - 汎用業務Webアプリを最速で作る](https://qiita.com/okoppe8/items/54eb105c9c94c0960f14#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%89-1)
 - [Djangoのフォーム（forms.py）を使ってデータを作成し、記録する（基礎の基礎３）](https://qiita.com/ykoji/items/4d4a1230724acc1b7c95)
@@ -68,7 +68,7 @@ pnpm run dev
 
 ## memo
 
-### 起動  
+### API起動  
 `python manage.py runserver`
 
 ### DBのテーブル作成  

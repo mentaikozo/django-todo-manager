@@ -20,8 +20,11 @@ dependencies = [
     "dj-rest-auth (==7.0.1)",
     "markdown2 (==2.5.3)",
     "qrcode (==8.0)",
+    "django-cors-headers (>=4.7.0,<5.0.0)",
 ]
 
+[tool.poetry]
+package-mode = false
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

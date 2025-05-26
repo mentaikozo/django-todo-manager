@@ -106,6 +106,22 @@ django = ">=3.2"
 ipware = ["django-ipware (>=3)"]
 
 [[package]]
+name = "django-cors-headers"
+version = "4.7.0"
+description = "django-cors-headers is a Django application for handling the server headers required for Cross-Origin Resource Sharing (CORS)."
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "django_cors_headers-4.7.0-py3-none-any.whl", hash = "sha256:f1c125dcd58479fe7a67fe2499c16ee38b81b397463cf025f0e2c42937421070"},
+    {file = "django_cors_headers-4.7.0.tar.gz", hash = "sha256:6fdf31bf9c6d6448ba09ef57157db2268d515d94fc5c89a0a1028e1fc03ee52b"},
+]
+
+[package.dependencies]
+asgiref = ">=3.6"
+django = ">=4.2"
+
+[[package]]
 name = "django-crispy-forms"
 version = "2.3"
 description = "Best way to have Django DRY forms"
@@ -343,4 +359,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4.0"
-content-hash = "89ab421eb09002d3a3d68b2ea5df1772fd9e4279052d03a2031c78dd680f04d3"
+content-hash = "287dfd8ea9734418789051ccb3e730a63ad793abf62e9b95409b2182af6f5677"

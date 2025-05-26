@@ -16,7 +16,7 @@ class Task(models.Model):
         (0, "未")
     )
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
 
     name = models.CharField(
         verbose_name="タスク名",

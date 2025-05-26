@@ -1,29 +1,29 @@
 import logging
-from datetime import datetime
+# from datetime import datetime
 
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from django.urls import reverse
-from django.urls import reverse_lazy
-from django.views import View
-from django.views.generic import TemplateView
+# from django.contrib.auth.views import LoginView, LogoutView
+# from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.http import HttpResponse
+# from django.shortcuts import redirect, render
+# from django.urls import reverse
+# from django.urls import reverse_lazy
+# from django.views import View
+# from django.views.generic import TemplateView
 from app.serializers import TaskSerializer
-from django_tables2 import SingleTableView
-from app.filters import TaskFilter
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django_filters.views import FilterView
+# from django_tables2 import SingleTableView
+# from app.filters import TaskFilter
+# from django.views.generic.detail import DetailView
+# from django.views.generic.edit import CreateView, UpdateView, DeleteView
+# from django_filters.views import FilterView
 
 from app.models import Task
-from app.tables import TaskTable
+# from app.tables import TaskTable
 
-from .forms import LoginForm, TaskForm
+# from .forms import LoginForm, TaskForm
 
-import django_otp
-from django_otp.plugins.otp_totp.models import TOTPDevice
-from django_otp.qr import write_qrcode_image
+# import django_otp
+# from django_otp.plugins.otp_totp.models import TOTPDevice
+# from django_otp.qr import write_qrcode_image
 from rest_framework.response import Response
 from rest_framework import status, views
 from rest_framework.generics import get_object_or_404
@@ -32,8 +32,8 @@ from rest_framework.generics import get_object_or_404
 logger = logging.getLogger(__name__)
 
 
-class TopView(TemplateView):
-    template_name = "app/top.html"
+# class TopView(TemplateView):
+#     template_name = "app/top.html"
 
 
 # DRFのAPIを使うためのView
@@ -79,6 +79,7 @@ class TaskRetrieveUpdateDestroyAPIView(views.APIView):
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+"""
 
 class TaskFilterView(LoginRequiredMixin, FilterView, SingleTableView, View):
     model = Task
@@ -226,3 +227,5 @@ class VerifyOtpView(LoginRequiredMixin, View):
 
         logger.error("OTP が違います")
         return redirect("app:verify_otp")
+
+"""
