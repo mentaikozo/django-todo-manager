@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # 3rd party
     'axes',
+    'corsheaders',
     "crispy_forms",
     "crispy_bootstrap4",
     'django_extensions',
@@ -74,22 +75,23 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_otp.middleware.OTPMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     # AxesMiddlewareをMIDDLEWAREの配列の一番最後に記載する必要があります
     'axes.middleware.AxesMiddleware',
 ]
 
 # ロックされるまでのログイン回数
-AXES_FAILURE_LIMIT = 3
+# AXES_FAILURE_LIMIT = 3
 # 自動でロックが解除されるまでの時間
-AXES_COOLOFF_TIME = 0.5
+# AXES_COOLOFF_TIME = 0.5
 # ロック対象をusernameで判断する
-AXES_LOCKOUT_PARAMETERS = ["username"]
+# AXES_LOCKOUT_PARAMETERS = ["username"]
 # ログインに成功したら失敗回数がリセットされるようにする
-AXES_RESET_ON_SUCCESS = True
+# AXES_RESET_ON_SUCCESS = True
 # アクセスログをデータベースに書き込まないようにする
-AXES_DISABLE_ACCESS_LOG = True
+# AXES_DISABLE_ACCESS_LOG = True
 # ロックアウト中にログインに失敗した場合、クールオフ期間をリセットしないようにする
-AXES_RESET_COOL_OFF_ON_FAILURE_DURING_LOCKOUT = False
+# AXES_RESET_COOL_OFF_ON_FAILURE_DURING_LOCKOUT = False
 
 ROOT_URLCONF = 'learning_manager.urls'
 
@@ -166,11 +168,11 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = "app:login"
-LOGIN_REDIRECT_URL = "app:home"
-LOGOUT_REDIRECT_URL = "app:top"
+# LOGIN_URL = "app:login"
+# LOGIN_REDIRECT_URL = "app:home"
+# LOGOUT_REDIRECT_URL = "app:top"
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # DRF
 REST_FRAMEWORK = {
@@ -180,10 +182,16 @@ REST_FRAMEWORK = {
 }
 
 # dj-rest-auth
-REST_USE_JWT = True
+# REST_USE_JWT = True
 
 # django-rest-framework-simplejwt
-SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('JWT',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30)
-}
+# SIMPLE_JWT = {
+#     'AUTH_HEADER_TYPES': ('JWT',),
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30)
+# }
+
+# CORS設定
+CORS_ALLOW_ALL_ORIGINS = True
+
+# 末尾のスラッシュなしでもアクセス可能にする
+# APPEND_SLASH = False
