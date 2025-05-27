@@ -1,12 +1,21 @@
-<script setup lang="ts">
-import TaskList from "./components/TaskList.vue";
-</script>
-
 <template>
-  <section>
-    <TaskList />
-  </section>
+  <v-app>
+    <AppBar />
+
+    <v-main>
+      <v-container>
+        <AddTaskButton />
+        <TaskCards />
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
+
+<script setup lang="ts">
+import AddTaskButton from "./components/AddTaskButton.vue";
+import AppBar from "./components/AppBar.vue";
+import TaskCards from "./components/TaskCards.vue";
+</script>
 
 <style scoped>
 .logo {
