@@ -2,7 +2,7 @@
   <v-row align="end">
     <v-col cols="12">
       <v-btn color="primary" @click="addNewTask">
-        <v-icon left>mdi-plus</v-icon>
+        <v-icon start icon="mdi-plus"></v-icon>
         新しいタスク
       </v-btn>
     </v-col>
