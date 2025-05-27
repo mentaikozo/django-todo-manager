@@ -1,6 +1,6 @@
 <template>
   <v-row align="end">
-    <v-col cols="12">
+    <v-col cols="12" class="d-flex justify-end">
       <v-btn color="primary" @click="addNewTask">
         <v-icon start icon="mdi-plus"></v-icon>
         新しいタスク

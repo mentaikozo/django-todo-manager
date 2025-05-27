@@ -1,6 +1,6 @@
 <template>
   <v-row justify="start">
-    <v-col v-for="task in tasks" :key="task.id" cols="6">
+    <v-col v-for="task in tasks" :key="task.id" cols="4">
       <v-card :color="getTaskColor(task.status)">
         <v-card-title>{{ task.name }}</v-card-title>
         <v-card-subtitle>{{ task.status }} ({{ task.progress }})</v-card-subtitle>
