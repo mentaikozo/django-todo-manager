@@ -1,8 +1,14 @@
 # Vue.js + Djangoの学習記録用
 
+## Image
+
+※ DjangoのUIベースで記述していたため表示が崩れている。修正予定。  
+
+![Top View](image.png)
+
 ## 構成
 UI: Vue3  
-CSS: Vuetify ※予定  
+CSS: Vuetify3  
 API: Django (Django REST Framework)  
 DB: SQLite ※今後、MySQLへ  
 IaC: terraform
