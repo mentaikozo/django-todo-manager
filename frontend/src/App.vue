@@ -9,9 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import AddTaskButton from "./components/AddTaskButton.vue";
-import AppBar from "./components/AppBar.vue";
-import TaskCards from "./components/TaskCards.vue";
+import AppBar from "@/components/AppBar.vue";
+import Top from "@/views/Top.vue";
 </script>
 
 <style scoped>
