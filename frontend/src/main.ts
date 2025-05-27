@@ -13,4 +13,7 @@ const vuetify = createVuetify({
     directives,
 })
 
-createApp(App).use(vuetify).mount('#app')
+// vue-router
+import router from '@/router'
+
+createApp(App).use(vuetify).use(router).mount('#app')

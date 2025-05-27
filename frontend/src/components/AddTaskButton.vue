@@ -9,6 +9,11 @@
   </v-row>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+function addNewTask() {
+  this.$router.push({ name: 'TaskForm' });
+}
+</script>
 
 <style scoped></style>
