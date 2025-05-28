@@ -1,22 +1,31 @@
 <template>
-  <div :class="`text-h3 pa-3`">新しいタスク</div>
+  <v-container class="d-flex align-start justify-start">
+    <v-row>
+      <v-col>
+        <div :class="`text-h3 pb-4`">新しいタスク</div>
 
-  <v-form @submit.prevent="submitForm" v-model="formValid">
-    <v-text-field v-model="task.name" label="タスク名" :rules="[rules.required]" required />
+        <v-form @submit.prevent="submitForm" v-model="formValid">
+          <v-text-field width="400" v-model="task.name" label="タスク名" :rules="[rules.required]" required />
 
-    <v-select v-model="task.status" label="ステータス" :items="statusChoices" item-title="label" item-value="value" />
+          <v-select max-width="200" v-model="task.status" label="ステータス" :items="statusChoices" item-title="label"
+            item-value="value" />
 
-    <v-text-field v-model="task.progress" label="進捗" suffix="%" :rules="[rules.required]" />
+          <v-text-field max-width="200" v-model="task.progress" label="進捗" suffix="%" :rules="[rules.required]" />
 
-    <v-text-field v-model.number="task.priority" label="優先度 (1〜10)" type="number"
-      :rules="[rules.required, rules.min, rules.max]" />
+          <v-text-field max-width="200" v-model.number="task.priority" label="優先度 (1〜10)" type="number"
+            :rules="[rules.required, rules.min, rules.max]" />
 
-    <v-combobox v-model="task.tags" label="タグ" multiple chips clearable />
+          <v-combobox max-width="300" v-model="task.tags" label="タグ" multiple chips clearable />
 
-    <v-textarea v-model="task.notes" label="メモ" rows="4" auto-grow />
+          <v-textarea width="800" v-model="task.notes" label="メモ" rows="4" auto-grow />
 
-    <v-btn color="primary" type="submit">保存</v-btn>
-  </v-form>
+          <div class="d-flex justify-start">
+            <v-btn color="primary" type="submit">保存</v-btn>
+          </div>
+        </v-form>
+      </v-col>
+    </v-row>
+  </v-container>
 
 </template>
 
