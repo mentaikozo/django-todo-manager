@@ -2,9 +2,16 @@
 
 ## Image
 
-※ DjangoのUIベースで記述していたため表示が崩れている。修正予定。  
+#### Top
+![Top View](top-image.png)  
 
-![Top View](image.png)
+- DjangoのUIベースで記述していたため表示が崩れている。修正予定。
+- 全体的にイケてない、Djangoのモデルも合わせて修正する
+
+#### タスク新規作成
+![alt Task create](new-task-image.png)  
+
+- Djangoのモデルを再考する必要がある
 
 ## 構成
 UI: Vue3  
