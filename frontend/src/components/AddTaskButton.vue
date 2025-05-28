@@ -10,9 +10,10 @@
 </template>
 
 <script setup lang="ts">
+import router from '@/router';
 
 function addNewTask() {
-  this.$router.push({ name: 'TaskForm' });
+  router.push({ name: 'TaskForm' });
 }
 </script>
 
