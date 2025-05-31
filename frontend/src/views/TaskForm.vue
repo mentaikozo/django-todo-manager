@@ -2,8 +2,8 @@
   <v-container class="d-flex align-start justify-start">
     <v-row>
       <v-col>
-        <div :class="`text-h3 pb-4`">
-          {{ taskId ? 'タスクの詳細' : '新しいタスク' }}
+        <div :class="`text-h5 pb-4`">
+          {{ taskId ? "Task Detail" : "Create New Task" }}
         </div>
 
         <v-form @submit.prevent="submitForm" v-model="formValid">
@@ -23,7 +23,7 @@
 
           <div class="d-flex justify-start">
             <v-btn color="primary" type="submit">
-              {{ taskId ? '更新' : '保存' }}
+              {{ taskId ? "Update" : "Save" }}
             </v-btn>
           </div>
         </v-form>

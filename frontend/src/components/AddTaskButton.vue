@@ -3,7 +3,7 @@
     <v-col cols="12" class="d-flex justify-end">
       <v-btn color="primary" @click="addNewTask">
         <v-icon start icon="mdi-plus"></v-icon>
-        新しいタスク
+        <div class="text-button">New Task</div>
       </v-btn>
     </v-col>
   </v-row>

@@ -3,9 +3,9 @@
     <v-card>
       <v-list>
         <v-list-item v-for="task in tasks" :key="task.id" @click="goTaskDetail(task.id)">
-          <div class="d-flex align-center w-100">
-            <div class="mr-4 task-name">{{ task.name }}</div>
-            <div class="clamp-text">{{ task.notes }}</div>
+          <div class="d-flex align-center w-100 pa-3">
+            <div class="mr-4 text-body-1 task-name">{{ task.name }}</div>
+            <div class="clamp-text text-body-2">{{ task.notes }}</div>
           </div>
           <v-divider></v-divider>
         </v-list-item>
