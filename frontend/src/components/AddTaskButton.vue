@@ -13,7 +13,7 @@
 import router from '@/router';
 
 function addNewTask() {
-  router.push({ name: 'TaskForm' });
+  router.push({ name: 'NewTask' });
 }
 </script>
 

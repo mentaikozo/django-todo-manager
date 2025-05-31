@@ -2,7 +2,9 @@
   <v-container class="d-flex align-start justify-start">
     <v-row>
       <v-col>
-        <div :class="`text-h3 pb-4`">新しいタスク</div>
+        <div :class="`text-h3 pb-4`">
+          {{ taskId ? 'タスクの詳細' : '新しいタスク' }}
+        </div>
 
         <v-form @submit.prevent="submitForm" v-model="formValid">
           <v-text-field width="400" v-model="task.name" label="タスク名" :rules="[rules.required]" required />
@@ -20,19 +22,24 @@
           <v-textarea width="800" v-model="task.notes" label="メモ" rows="4" auto-grow />
 
           <div class="d-flex justify-start">
-            <v-btn color="primary" type="submit">保存</v-btn>
+            <v-btn color="primary" type="submit">
+              {{ taskId ? '更新' : '保存' }}
+            </v-btn>
           </div>
         </v-form>
       </v-col>
     </v-row>
   </v-container>
-
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
+import { ref, onMounted } from "vue"
 import router from "@/router"
 import axios from "axios"
+import { useRoute } from "vue-router"
+
+const route = useRoute()
+const taskId = route.params?.id as string | undefined
 
 const formValid = ref()
 
@@ -56,16 +63,32 @@ const rules = {
   max: (v: number) => v <= 10 || '10以下で入力してください',
 }
 
-const submitForm = () => {
+onMounted(async () => {
+  if (taskId) {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/tasks/${taskId}/`)
+      console.log(response.data)
+      task.value = response.data
+    } catch (error) {
+      console.error("Error fetching task:", error)
+    }
+  }
+})
+
+const submitForm = async () => {
   if (!formValid.value) return
 
   try {
-    const response = axios.post("http://localhost:8000/api/tasks/", task.value);
-
-    console.log("Task saved successfully:", response.data);
-    router.push({ name: 'Top' });
+    if (taskId) {
+      const response = await axios.put(`http://localhost:8000/api/tasks/${taskId}/`, task.value)
+      console.log("Task updated successfully:", response.data)
+    } else {
+      const response = await axios.post("http://localhost:8000/api/tasks/", task.value)
+      console.log("Task saved successfully:", response.data)
+    }
+    router.push({ name: "Top" })
   } catch (error) {
-    console.error("Error creating tasks:", error);
+    console.error("Error processing tasks:", error)
   }
 }
 </script>

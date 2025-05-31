@@ -1,7 +1,7 @@
 <template>
   <v-row justify="start">
     <v-col v-for="task in tasks" :key="task.id" cols="4">
-      <v-card :color="getTaskColor(task.status)">
+      <v-card :color="getTaskColor(task.status)" @click="goTaskDetail(task.id)">
         <v-card-title>{{ task.name }}</v-card-title>
         <v-card-subtitle>{{ task.status }} ({{ task.progress }})</v-card-subtitle>
         <v-card-text>
@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import router from "@/router";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import { marked } from "marked";
@@ -43,6 +44,10 @@ function getTaskColor(status: number) {
 
 function renderMarkdown(markdownText) {
   return DOMPurify.sanitize(marked(markdownText))
+}
+
+function goTaskDetail(id: number) {
+  router.push({ name: 'TaskDetail', params: { "id": id } });
 }
 
 </script>

@@ -5,7 +5,8 @@ import TaskForm from '@/views/TaskForm.vue'
 
 const routes = [
   { path: '/', name: 'Top', component: Top },
-  { path: '/new-task', name: 'TaskForm', component: TaskForm },
+  { path: '/tasks/new', name: 'NewTask', component: TaskForm },
+  { path: '/tasks/:id', name: 'TaskDetail', component: TaskForm, props: true },
 ]
 
 const router = createRouter({
