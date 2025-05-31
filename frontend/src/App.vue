@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <AppBar />
-
     <v-main>
       <router-view />
     </v-main>
@@ -9,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import AppBar from "@/components/AppBar.vue";
 import Top from "@/views/Top.vue";
 </script>
 
