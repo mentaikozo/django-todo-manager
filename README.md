@@ -5,8 +5,7 @@
 #### Top
 ![Top View](top-image.png)  
 
-- DjangoのUIベースで記述していたため表示が崩れている。修正予定。
-- 全体的にイケてない、Djangoのモデルも合わせて修正する
+- 左ペインにメニュー追加予定
 
 #### タスク新規作成
 ![alt Task create](new-task-image.png)  
