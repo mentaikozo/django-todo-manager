@@ -1,13 +1,23 @@
 <template>
   <v-row justify="start">
-    <v-col v-for="task in tasks" :key="task.id" cols="4">
-      <v-card :color="getTaskColor(task.status)" @click="goTaskDetail(task.id)">
+    <v-col cols="12">
+      <v-card>
+        <v-list>
+          <v-list-item v-for="task in tasks" :key="task.id" @click="goTaskDetail(task.id)">
+            <div class="d-flex align-center w-100">
+              <div class="mr-4 task-name">{{ task.name }}</div>
+              <div class="clamp-text">{{ task.notes }}</div>
+            </div>
+          </v-list-item>
+        </v-list>
+      </v-card>
+      <!-- <v-card :color="getTaskColor(task.status)" @click="goTaskDetail(task.id)">
         <v-card-title>{{ task.name }}</v-card-title>
         <v-card-subtitle>{{ task.status }} ({{ task.progress }})</v-card-subtitle>
         <v-card-text>
           <div class="clamp-text" v-html="renderMarkdown(task.notes)"></div>
         </v-card-text>
-      </v-card>
+      </v-card> -->
     </v-col>
   </v-row>
 </template>
@@ -53,6 +63,12 @@ function goTaskDetail(id: number) {
 </script>
 
 <style scoped>
+.task-name {
+  font-weight: bold;
+  min-width: 150px;
+  max-width: 150px;
+}
+
 .clamp-text {
   display: -webkit-box;
   -webkit-line-clamp: 3;
