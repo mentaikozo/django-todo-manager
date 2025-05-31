@@ -22,26 +22,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import router from "@/router";
-import axios from "axios";
-import DOMPurify from "dompurify";
-import { marked } from "marked";
+import { ref, onMounted } from "vue"
+import router from "@/router"
+import Task from "@/types"
+import axios from "axios"
+import DOMPurify from "dompurify"
+import { marked } from "marked"
 
-const tasks = ref([]);
 
-const fetchTasks = async () => {
-  try {
-    const response = await axios.get("http://localhost:8000/api/tasks/");
-    tasks.value = response.data;
-  } catch (error) {
-    console.error("Error fetching tasks:", error);
-  }
-};
-
-onMounted(() => {
-  fetchTasks();
-});
+const props = defineProps<{ tasks: Task[] }>()
 
 function getTaskColor(status: number) {
   if (status === 1) {
