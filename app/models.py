@@ -24,7 +24,7 @@ class Task(models.Model):
         unique=True
     )
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     progress = models.CharField(
         verbose_name = "進捗",
@@ -56,6 +56,13 @@ class Task(models.Model):
         null=True,
         max_length=50000
     )
+
+    def get_tags(self):
+        """
+        names() is a django-taggit method, returning a ValuesListQuerySet
+        (basically just an iterable) containing the name of each tag as a string
+        """
+        return self.tags.names()
 
 
     def render_notes_as_html(self):
