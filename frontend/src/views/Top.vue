@@ -3,7 +3,7 @@
     <ToolBar />
     <AddTaskButton />
     <v-row justify="start">
-      <SideMenu />
+      <SideMenu :tasks="tasks" />
       <TaskCards :tasks="tasks" />
     </v-row>
   </v-container>

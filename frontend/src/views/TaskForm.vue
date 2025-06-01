@@ -67,7 +67,7 @@ onMounted(async () => {
   if (taskId) {
     try {
       const response = await axios.get(`http://localhost:8000/api/tasks/${taskId}/`)
-      console.log(response.data)
+      console.log("get response:", response.data)
       task.value = response.data
     } catch (error) {
       console.error("Error fetching task:", error)
