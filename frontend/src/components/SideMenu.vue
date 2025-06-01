@@ -6,7 +6,8 @@
       <div class="d-flex mt-2 text-body-1">
         Tags
       </div>
-      <v-checkbox v-for="tag in tags" :key="tag" v-model="selected" :label="tag" :value="tag" />
+      <v-checkbox density="compact" hide-details v-for="tag in tags" :key="tag" v-model="selected" :label="tag"
+        :value="tag" />
     </v-card>
   </v-col>
 </template>
